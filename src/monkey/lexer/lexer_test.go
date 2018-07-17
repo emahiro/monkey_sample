@@ -25,6 +25,9 @@ func TestNextToken(t *testing.T) {
 	} else {
 		return false;
 	}
+	
+	10 == 10;
+	10 != 9;
 	`
 
 	tests := []struct {
@@ -96,6 +99,14 @@ func TestNextToken(t *testing.T) {
 		{expectedType: token.FALSE, expectedLiteral: "false"},
 		{expectedType: token.SEMICOLON, expectedLiteral: ";"},
 		{expectedType: token.RBRACE, expectedLiteral: "}"},
+		{expectedType: token.INT, expectedLiteral: "10"},
+		{expectedType: token.EQ, expectedLiteral: "=="},
+		{expectedType: token.INT, expectedLiteral: "10"},
+		{expectedType: token.SEMICOLON, expectedLiteral: ";"},
+		{expectedType: token.INT, expectedLiteral: "10"},
+		{expectedType: token.NOT_EQ, expectedLiteral: "!="},
+		{expectedType: token.INT, expectedLiteral: "9"},
+		{expectedType: token.SEMICOLON, expectedLiteral: ";"},
 	}
 
 	l := New(input)
