@@ -49,7 +49,7 @@ func (ls *LetStatement) TokenLiteral() string {
 
 type Identifier struct {
 	Token token.Token // token.IDENT のトークン
-	Name  string      // 変数名
+	Value string      // 変数の実際の値
 }
 
 func (i *Identifier) expressionNode() {}
