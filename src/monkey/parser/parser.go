@@ -32,7 +32,7 @@ func (p *Parser) ParseProgram() *ast.Program {
 	pg := &ast.Program{}
 	pg.Statements = []ast.Statement{}
 
-	for p.curToken.Type != token.EOF {
+	for !p.curTokenIs(token.EOF) {
 		stmt := p.parseStatement()
 		if stmt != nil {
 			pg.Statements = append(pg.Statements, stmt)
@@ -54,7 +54,7 @@ func (p *Parser) parseStatement() ast.Statement {
 
 func (p *Parser) parseLetStatement() *ast.LetStatement {
 	stmt := &ast.LetStatement{Token: p.curToken}
-	if !p.expectPeek(token.IDENT) {
+	if !p.expectPeek(token.IDENT) { // let = 5 を想定しているので次に読み込むtokenは x, y のようなIdentifierであることを期待する。
 		return nil
 	}
 
